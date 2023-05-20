@@ -1,0 +1,250 @@
+/api/v1/landlords:
+  get:
+    tags:
+      - Landlords
+    security:
+      - bearerAuth: []
+    description: get all landlords.
+    parameters:
+      - in: query
+        name: page
+        schema:
+          type: number
+          default: 1
+      - in: query
+        name: limit
+        schema:
+          type: number
+          default: 20
+      - in: query
+        name: landlordType
+        schema:
+          type: string
+          enum: [personne physique, entreprise]
+      - in: query
+        name: maritalStatus
+        schema:
+          type: string
+          enum: [married, signle]
+
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Great response
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  post:
+    tags:
+      - Landlords
+    security:
+      - bearerAuth: []
+    description: create landlord.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Landlord"
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+/api/v1/landlords/{id}:
+  put:
+    tags:
+      - Landlords
+    security:
+      - bearerAuth: []
+    description: update landlord.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UPersonne"
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  delete:
+    tags:
+      - Landlords
+    security:
+      - bearerAuth: []
+    description: delete landlord.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+
+/api/v1/landlords/phones/{id}:
+  post:
+    tags:
+      - Landlords
+    security:
+      - bearerAuth: []
+    description: add phone number for landlord.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PPhone"
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  put:
+    tags:
+      - Landlords
+    security:
+      - bearerAuth: []
+    description: update landlord's phone number.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PPhone"
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  delete:
+    tags:
+      - Landlords
+    security:
+      - bearerAuth: []
+    description: delete phone.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+
+/api/v1/landlords/phones/running/{id}:
+  put:
+    tags:
+      - Landlords
+    security:
+      - bearerAuth: []
+    description: update landlord's phone number.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PPhone"
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"

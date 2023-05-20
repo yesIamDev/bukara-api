@@ -1,0 +1,250 @@
+/api/v1/entreprises:
+  post:
+    tags:
+      - Entreprise
+    security:
+      - bearerAuth: []
+    description: create a user account.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/entreprise"
+
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+/api/v1/entreprises/{id}:
+  get:
+    tags:
+      - Entreprise
+    security:
+      - bearerAuth: []
+    description: show user account.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    produces:
+      - application/json
+
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  put:
+    tags:
+      - Entreprise
+    security:
+      - bearerAuth: []
+    description: update entreprise data.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/updateEtreprise"
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+
+/api/v1/entreprises/logo/{id}:
+  put:
+    security:
+      - bearerAuth: []
+    tags:
+      - Entreprise
+    description: update entreprise's logo.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    requestBody:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              profile:
+                type: string
+                format: binary
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+
+components:
+  schemas:
+    updateEtreprise:
+      type: object
+      properties:
+        designation:
+          type: string
+        description:
+          type: string
+        rccm:
+          type: string
+      required:
+        - designation
+        - description
+        - rccm
+    entreprise:
+      type: object
+      properties:
+        designation:
+          type: string
+        description:
+          type: string
+        rccm:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: "#/components/schemas/Addresses"
+        bank_accounts:
+          type: array
+          items:
+            $ref: "#/components/schemas/bankAccounts"
+      required:
+        - designation
+        - description
+        - rccm
+        - addresses
+        - bank_accounts
+    Addresses:
+      type: object
+      properties:
+        country:
+          type: string
+        town:
+          type: string
+        city:
+          type: string
+        quarter:
+          type: string
+        street:
+          type: string
+        number:
+          type: number
+      required:
+        - country
+        - town
+        - city
+        - quarter
+        - street
+        - number
+    bankAccounts:
+      type: object
+      properties:
+        bank:
+          type: string
+        account_name:
+          type: string
+        account_number:
+          type: number
+      required:
+        - bank
+        - account_name
+        - account_number
+
+    updateUser:
+      type: object
+      properties:
+        name:
+          type: string
+        lastname:
+          type: string
+        country_code:
+          type: string
+        phone_number:
+          type: string
+        email:
+          type: string
+      required:
+        - name
+        - lastname
+        - country_code
+        - phone_number
+        - email
+
+    changePsswd:
+      type: object
+      properties:
+        old_password:
+          type: string
+        password:
+          type: string
+        confirme_password:
+          type: string
+      required:
+        - old_password
+        - password
+        - confirme_password
+
+    great_response:
+      type: object
+      properties:
+        status:
+          type: boolean
+        data:
+          type: object
+
+    error_response:
+      type: object
+      properties:
+        status:
+          type: boolean
+        message:
+          type: string

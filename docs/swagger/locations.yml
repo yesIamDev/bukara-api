@@ -1,0 +1,113 @@
+/api/v1/rental-contrats:
+  get:
+    tags:
+      - Rental Contrat
+    security:
+      - bearerAuth: []
+    description: get all rental contrat.
+    parameters:
+      - in: query
+        name: page
+        schema:
+          type: number
+          default: 1
+      - in: query
+        name: limit
+        schema:
+          type: number
+          default: 20
+      - in: query
+        name: user
+        schema:
+          type: string
+      - in: query
+        name: landlord
+        schema:
+          type: string
+      - in: query
+        name: appartement
+        schema:
+          type: string
+      # - in: query
+      #   name: start_date
+      #   schema:
+      #     type: string
+      - in: query
+        name: status
+        schema:
+          type: boolean
+
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Great response
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  post:
+    tags:
+      - Rental Contrat
+    security:
+      - bearerAuth: []
+    description: create rental contrat.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RentalContrat"
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+api/v1/rental-contrats/break/{id}:
+  post:
+    tags:
+      - Rental Contrat
+    security:
+      - bearerAuth: []
+    description: break rental contrat.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BreakRentalContrat"
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"

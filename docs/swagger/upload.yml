@@ -1,0 +1,27 @@
+/api/v1/upload:
+  post:
+    tags:
+      - upload File
+    requestBody:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              profile:
+                type: string
+                format: binary
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/greate_response"
+
+      422:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"

@@ -1,0 +1,159 @@
+components:
+  schemas:
+    typeBien:
+      type: object
+      properties:
+        designation:
+          type: string
+        description:
+          type: string
+      required:
+        - designation
+    appatements:
+      type: object
+      properties:
+        typeBienId:
+          type: string
+        typeAppartementId:
+          type: string
+        description:
+          type: string
+        features:
+          type: string
+        address:
+          type: string
+        number:
+          type: number
+      required:
+        - typeBienId
+        - typeAppartementId
+        - description
+        - features
+        - address
+    Landlord:
+      type: object
+      properties:
+        name:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        cardType:
+          type: string
+        cardTypeId:
+          type: string
+        maritalStatus:
+          type: string
+          enum: [married, signle]
+        nationality:
+          type: string
+        lastAdress:
+          type: string
+        landlordType:
+          type: string
+          enum: [personne physique, entreprise]
+        phones:
+          type: array
+          items:
+            type: object
+            properties:
+              countryCode:
+                type: string
+              number:
+                type: string
+              running:
+                type: boolean
+      required:
+        - name
+        - lastname
+        - email
+        - cardType
+        - cardTypeId
+        - maritalStatus
+        - nationality
+        - lastAdress
+        - landlordType
+        - phones
+        - countryCode
+        - number
+        - running
+    UPersonne:
+      type: object
+      properties:
+        name:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        cardType:
+          type: string
+        cardTypeId:
+          type: string
+        maritalStatus:
+          type: string
+          enum: [married, signle]
+        nationality:
+          type: string
+        lastAdress:
+          type: string
+        landlordType:
+          type: string
+          enum: [personne physique, entreprise]
+      required:
+        - name
+        - lastname
+        - email
+        - cardType
+        - cardTypeId
+        - maritalStatus
+        - nationality
+        - lastAdress
+        - landlordType
+    PPhone:
+      type: object
+      properties:
+        countryCode:
+          type: string
+        number:
+          type: string
+      required:
+        - countryCode
+        - number
+    UpdatePPhone:
+      type: object
+      properties:
+        countryCode:
+          type: string
+        number:
+          type: string
+      required:
+        - countryCode
+        - number
+    RentalContrat:
+      type: object
+      properties:
+        appatementId:
+          type: string
+        landlordId:
+          type: string
+        amount:
+          type: number
+        month:
+          type: number
+        numberOfHabitant:
+          type: number
+      required:
+        - appatementId
+        - landlordId
+        - amount
+        - month
+        - numberOfHabitant
+    BreakRentalContrat:
+      type: object
+      properties:
+        landlordId:
+          type: string
+      required:
+        - landlordId

@@ -1,0 +1,258 @@
+/api/v1/users:
+  post:
+    tags:
+      - Users
+    security:
+    description: create a user account.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/user"
+
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  get:
+    tags:
+      - Users
+    security:
+      - bearerAuth: []
+    description: show user account.
+
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  put:
+    tags:
+      - Users
+    security:
+      - bearerAuth: []
+    description: update a user.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/updateUser"
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+
+/api/v1/users/signin:
+  post:
+    tags:
+      - Users
+    description: User Login.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/login"
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+
+/api/v1/users/change/profile:
+  put:
+    security:
+      - bearerAuth: []
+    tags:
+      - Users
+    description: update user's profile.
+    requestBody:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              profile:
+                type: string
+                format: binary
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+
+/api/v1/users/change/psswd:
+  put:
+    security:
+      - bearerAuth: []
+    tags:
+      - Users
+    description: update user's psswd.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/changePsswd"
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+
+/api/v1/users/logout:
+  post:
+    security:
+      - bearerAuth: []
+    tags:
+      - Users
+    description: user logOut.
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        password_confirmation:
+          type: string
+      required:
+        - email
+        - password
+        - password_confirmation
+    login:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+
+    updateUser:
+      type: object
+      properties:
+        name:
+          type: string
+        lastname:
+          type: string
+        country_code:
+          type: string
+        phone_number:
+          type: string
+        email:
+          type: string
+      required:
+        - name
+        - lastname
+        - country_code
+        - phone_number
+        - email
+
+    changePsswd:
+      type: object
+      properties:
+        old_password:
+          type: string
+        password:
+          type: string
+        confirme_password:
+          type: string
+      required:
+        - old_password
+        - password
+        - confirme_password
+
+    great_response:
+      type: object
+      properties:
+        status:
+          type: boolean
+        data:
+          type: object
+
+    error_response:
+      type: object
+      properties:
+        status:
+          type: boolean
+        message:
+          type: string

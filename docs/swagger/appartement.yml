@@ -1,0 +1,217 @@
+/api/v1/appartements:
+  get:
+    tags:
+      - Appartements
+    security:
+      - bearerAuth: []
+    description: get all appartements.
+    parameters:
+      - in: query
+        name: page
+        schema:
+          type: number
+          default: 1
+      - in: query
+        name: limit
+        schema:
+          type: number
+          default: 20
+      - in: query
+        name: typeAppartement
+        schema:
+          type: string
+      - in: query
+        name: typeBien
+        schema:
+          type: string
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Great response
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  post:
+    tags:
+      - Appartements
+    security:
+      - bearerAuth: []
+    description: create a new appartement.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/appatements"
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+/api/v1/appartements/{id}:
+  get:
+    tags:
+      - Appartements
+    security:
+      - bearerAuth: []
+    description: show appartement.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/appatements"
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  put:
+    tags:
+      - Appartements
+    security:
+      - bearerAuth: []
+    description: update appartement.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/appatements"
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  delete:
+    tags:
+      - Appartements
+    security:
+      - bearerAuth: []
+    description: update appartement.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+
+/api/v1/appartements/images/{id}:
+  post:
+    tags:
+      - Appartements
+    security:
+      - bearerAuth: []
+    description: delete Image of appartement.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    requestBody:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              profile:
+                type: string
+                format: binary
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  delete:
+    tags:
+      - Appartements
+    security:
+      - bearerAuth: []
+    description: delete Image of appartement.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    responses:
+      200:
+        description: Great response.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"

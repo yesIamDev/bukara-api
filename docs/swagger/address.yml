@@ -1,0 +1,90 @@
+/api/v1/address/{id}:
+  post:
+    tags:
+      - Address
+    security:
+      - bearerAuth: []
+    description: create a new address for entreprise.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Addresses"
+
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  put:
+    tags:
+      - Address
+    security:
+      - bearerAuth: []
+    description: update address for entreprise.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Addresses"
+
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+
+  delete:
+    tags:
+      - Address
+    security:
+      - bearerAuth: []
+    description: delete address.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    produces:
+      - application/json
+
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"

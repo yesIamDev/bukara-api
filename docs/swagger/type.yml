@@ -1,0 +1,175 @@
+/api/v1/type/biens:
+  get:
+    tags:
+      - Type Bien
+    security:
+      - bearerAuth: []
+    description: get all type bien.
+    parameters:
+      - in: query
+        name: page
+        schema:
+          type: number
+          default: 1
+      - in: query
+        name: limit
+        schema:
+          type: number
+          default: 20
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  post:
+    tags:
+      - Type Bien
+    security:
+      - bearerAuth: []
+    description: create a new type bien.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/typeBien"
+
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+/api/v1/type/biens/{id}:
+  delete:
+    tags:
+      - Type Bien
+    security:
+      - bearerAuth: []
+    description: delete a type bien.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+
+/api/v1/type/appartements:
+  get:
+    tags:
+      - Type Appart
+    security:
+      - bearerAuth: []
+    description: get all type appart.
+    parameters:
+      - in: query
+        name: page
+        schema:
+          type: number
+          default: 1
+      - in: query
+        name: limit
+        schema:
+          type: number
+          default: 20
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  post:
+    tags:
+      - Type Appart
+    security:
+      - bearerAuth: []
+    description: create a new type apprt.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/typeBien"
+
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+/api/v1/type/appartements/{id}:
+  delete:
+    tags:
+      - Type Appart
+    security:
+      - bearerAuth: []
+    description: delete a type appart.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"

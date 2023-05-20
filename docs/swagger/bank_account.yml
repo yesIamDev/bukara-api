@@ -1,0 +1,94 @@
+/api/v1/bank-account/{id}:
+  post:
+    tags:
+      - Bank-account
+    security:
+      - bearerAuth: []
+    description: create a new bank account for entreprise.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/bankAccounts"
+
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+  put:
+    tags:
+      - Bank-account
+    security:
+      - bearerAuth: []
+    description: update bank account for entreprise.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/bankAccounts"
+
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
+
+  delete:
+    tags:
+      - Bank-account
+    security:
+      - bearerAuth: []
+    description: delete Bank account.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+    produces:
+      - application/json
+
+    responses:
+      200:
+        description: Compy
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/great_response"
+
+      422 | 404:
+        description: En cas d'echec
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/error_response"
